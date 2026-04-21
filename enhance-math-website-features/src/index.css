@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --bg:        #0a0e1a;
+  --bg2:       #0f1525;
+  --bg3:       #141c30;
+  --surface:   #1a2340;
+  --surface2:  #1f2a4a;
+  --border:    rgba(99,179,237,0.15);
+  --border2:   rgba(99,179,237,0.3);
+  --accent:    #3b82f6;
+  --accent2:   #60a5fa;
+  --gold:      #f59e0b;
+  --gold2:     #fbbf24;
+  --teal:      #14b8a6;
+  --teal2:     #2dd4bf;
+  --text:      #e2e8f0;
+  --text2:     #94a3b8;
+  --text3:     #64748b;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* Math always LTR */
+.katex, .katex * {
+  direction: ltr !important;
+  unicode-bidi: isolate;
+}
+
+.math-ltr {
+  direction: ltr;
+  display: inline-block;
+  unicode-bidi: embed;
+}
+
+.math-block-wrap {
+  direction: ltr;
+  text-align: center;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border2); }
+
+/* Animations */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-slide-in { animation: slideIn 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-in  { animation: fadeIn 0.3s ease both; }
+
+/* Grid background */
+.grid-bg::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid-bg::after {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 10%, rgba(59,130,246,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 80% 90%, rgba(20,184,166,0.07) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Formula table direction fix */
+.formula-table td { direction: ltr; text-align: center; }
+.formula-table td.rtl-cell { direction: rtl; text-align: right; }
+.formula-table td.num-cell { direction: rtl; text-align: center; }
